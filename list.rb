@@ -64,15 +64,24 @@ class DLL
   end
 
   def rem_duplicates
-    node = @head
     return 'The list is empty' if @head == nil
+
+    node = @head
     hash = Hash.new(0)
     while node != nil do
       hash[node.data] = true if hash[node.data] != true
       node = node.next
     end
+
     key_array = hash.keys
-    return key_array.inspect
+    dll = DLL.new
+
+    key_array.each do |data|
+      dll.insert(data)
+    end
+
+    return dll
+
   end
 
   def to_s
@@ -90,7 +99,7 @@ end
 
 
 #Test code
-list = DLL.new()
+list = DLL.new
 numbers = (1..100).to_a
 
 200.times do
@@ -104,6 +113,6 @@ puts ''
 puts'--------------------------------------------------------------------------'
 puts ''
 puts 'Double Linked List with duplicates removed:'
-puts list.rem_duplicates
+puts list.rem_duplicates.to_s
 
 
